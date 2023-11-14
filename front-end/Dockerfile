@@ -1,7 +1,7 @@
 FROM node:16.14.0-alpine
-WORKDIR /app-backend
+WORKDIR /app-frontend
 COPY package*.json ./
 RUN npm install
 COPY ./ ./
-EXPOSE 3001
-ENTRYPOINT [ "npm", "run", "dev" ]
+EXPOSE 3000
+ENTRYPOINT [ "npm", "start" ]
