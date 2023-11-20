@@ -20,24 +20,23 @@ services:
       - 3001:3001
     working_dir: /app-backend
     command: dev
-    volumes:
-      - ./back-end:/app-backend
     depends_on:
       database:
         condition: service_healthy
     environment:
-      - APP_PORT=3001
       - JWT_SECRET=jwt_secret
       - DB_USER=root
       - DB_PASSWORD=123456
       - DB_HOST=database
       - DB_PORT=3306
+      - API_PORT=3000
+      - NODE_ENV='development'
     healthcheck:
       test: [ "CMD", "lsof", "-t", "-i:3001" ]
       timeout: 10s
       retries: 5
   database:
-    image: mysql:8.0.23
+    image: mysql:8.0.25
     container_name: portfolio_database
     ports:
       - 3306:3306
