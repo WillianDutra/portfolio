@@ -5,21 +5,15 @@ const checkUserExists = (username) => User.findOne(
     { attributes: { exclude: ['password'] } }
 );
 
-const getUserByName = (username) => User.findOne(
-    { where: { username } }
-);
-
-const createUser = ({username, password, role}) => User.create(
-    { username, email, password, role }
-);
-
-const deleteUser = (id) => User.destroy(
-    { where: { id } }
-);
+const getUserById = (id) => User.findByPk(id);
+const getAllUsers = () => User.findAll({attributes: { exclude: ['password'] }});
+const createUser = ({username, password, role}) => User.create({ username, password, role });
+const deleteUser = (id) => User.destroy({ where: { id } });
 
 module.exports = {
     checkUserExists,
-    getUserByName,
+    getUserById,
+    getAllUsers,
     createUser,
     deleteUser
 };
