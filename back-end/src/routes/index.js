@@ -2,7 +2,7 @@ const express = require('express');
 const apiRoutes = express.Router();
 const { sequelize } = require('../models');
 const { User } = require('../controllers');
-const { validateNewUser } = require('../middlewares');
+const { validateNewUser, validateToken } = require('../middlewares');
 
 apiRoutes.get('/health', async (_req, res) => {
   try {
@@ -14,5 +14,6 @@ apiRoutes.get('/health', async (_req, res) => {
 });
 
 apiRoutes.post('/user', validateNewUser, User.createUser);
+apiRoutes.delete('/user/me', validateToken, User.deleteUser);
 
 module.exports = apiRoutes;
