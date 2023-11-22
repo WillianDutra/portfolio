@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     Image.associate = (models) => {
-        Image.HasOne(models.BlogPost, {foreignKey: 'postId', as: 'post'})
+        Image.hasOne(models.BlogPost, {foreignKey: 'postId', as: 'post'})
     };
 
     return Image;
