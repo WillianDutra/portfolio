@@ -28,13 +28,13 @@ services:
       database:
         condition: service_healthy
     environment:
-      - JWT_SECRET=jwt_secret
       - DB_USER=root
       - DB_PASSWORD=123456
       - DB_HOST=database
       - DB_PORT=3306
-      - API_PORT=3000
-      - NODE_ENV='development'
+      - JWT_SECRET=jwt_secret
+      - API_PORT=3001
+      - NODE_ENV=development
     healthcheck:
       test: [ "CMD", "lsof", "-t", "-i:3001" ]
       timeout: 10s
