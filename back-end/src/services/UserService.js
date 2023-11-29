@@ -8,7 +8,7 @@ const checkUserExists = async (username) => User.findOne(
     { attributes: { exclude: ['password'] } }
 );
 
-const createUser = async ({ username, password, role }) => {
+const createUser = async ({ username, password }) => {
     const userExists = await checkUserExists(username);
     if (userExists) throw new Conflict('User already exists');
     

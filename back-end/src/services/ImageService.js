@@ -3,7 +3,7 @@ const BadRequest = require('../errors/BadRequest');
 
 const getImagesFromPost = (id) => Image.findAll({ where: { postId: id } });
 
-const createImage = (postId, imageName, imagePath) => {
+const createImage = ({ postId, imageName, imagePath }) => {
     const postExists = Post.findByPk(postId);
     if (!postExists) throw new BadRequest("Post not found");
 
