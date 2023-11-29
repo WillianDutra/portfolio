@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
                 autoIncrement: true,
             },
             postId: { type: DataTypes.INTEGER, foreignKey: true },
-            name: DataTypes.STRING,
-            image: DataTypes.BLOB('long'),
+            imageName: DataTypes.STRING,
+            imagePath: DataTypes.STRING,
         }
     );
 
