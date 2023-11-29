@@ -1,8 +1,8 @@
 const express = require('express');
 const apiRoutes = express.Router();
 const { sequelize } = require('../models');
-const { User, Category } = require('../controllers');
-const { validateNewUser, validateToken } = require('../middlewares');
+const { User, Category, Image } = require('../controllers');
+const { validateNewUser, validateToken, validateNewImage } = require('../middlewares');
 
 apiRoutes.get('/health', async (_req, res) => {
   try {
@@ -13,10 +13,16 @@ apiRoutes.get('/health', async (_req, res) => {
   }
 });
 
+// User
 apiRoutes.post('/user', validateNewUser, User.createUser);
 apiRoutes.delete('/user/me', validateToken, User.deleteUser);
 
+// Category
 apiRoutes.get('/categories', Category.getCategories);
 apiRoutes.post('/categories', validateToken, Category.createCategory);
+
+// Image
+apiRoutes.post('/images', validateToken, validateNewImage, Image.createImage);
+apiRoutes.delete('/images/:id', validateToken, Image.deleteImage);
 
 module.exports = apiRoutes;
