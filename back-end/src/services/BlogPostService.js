@@ -1,5 +1,5 @@
 const { BlogPost, User, Category, PostCategory } = require('../models');
-const BadRequest = require('../errors/BadRequest');
+const BadRequest = require('../utils/ErrorStatus/BadRequest');
 
 const getPosts = () => {
     return BlogPost.findAll({

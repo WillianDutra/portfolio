@@ -1,5 +1,5 @@
 const { Image, Post } = require('../models');
-const BadRequest = require('../errors/BadRequest');
+const BadRequest = require("../utils/ErrorStatus/BadRequest");
 
 const getImagesFromPost = (id) => Image.findAll({ where: { postId: id } });
 

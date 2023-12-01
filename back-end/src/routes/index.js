@@ -10,6 +10,9 @@ const {
   validateNewPost
 } = require('../middlewares');
 
+const multerConfig = require('../utils/multerConfig');
+const uploadImage = multerConfig.single('image');
+
 apiRoutes.get('/health', async (_req, res) => {
   try {
     await sequelize.authenticate();
@@ -28,13 +31,13 @@ apiRoutes.get('/categories', Category.getCategories);
 apiRoutes.post('/categories', validateToken, Category.createCategory);
 
 // Image
-apiRoutes.post('/images', validateToken, validateNewImage, Image.createImage);
+apiRoutes.post('/images', validateToken, validateNewImage, uploadImage, Image.createImage);
 apiRoutes.delete('/images/:id', validateToken, Image.deleteImage);
 
 // BlogPost
 apiRoutes.get('/blog', BlogPost.getPosts);
 apiRoutes.get('/blog/:id', BlogPost.getPostById);
-apiRoutes.post('/blog', validateToken, BlogPost.createPost);
+apiRoutes.post('/blog', validateToken, validateNewPost, BlogPost.createPost);
 apiRoutes.delete('/blog/:id', validateToken, BlogPost.deletePost);
 
 module.exports = apiRoutes;
