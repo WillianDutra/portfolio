@@ -7,4 +7,6 @@ app.use(cors());
 app.use(express.json());
 app.use(apiRoutes);
 
+app.use(express.static('public'));
+
 module.exports = app;
