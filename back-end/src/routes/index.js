@@ -1,7 +1,7 @@
 const express = require('express');
 const apiRoutes = express.Router();
 const { sequelize } = require('../models');
-const { User, Category, Image, BlogPost } = require('../controllers');
+const { User, Category, Image, BlogPost, Login } = require('../controllers');
 
 const {
   validateNewUser,
@@ -21,6 +21,9 @@ apiRoutes.get('/health', async (_req, res) => {
     return res.status(500).json({ message: `Unable to connect to the database: ${error.message}` });
   }
 });
+
+// Login
+apiRoutes.post('/login', Login.userLogin);
 
 // User
 apiRoutes.post('/user', validateNewUser, User.createUser);

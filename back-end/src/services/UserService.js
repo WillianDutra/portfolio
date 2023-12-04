@@ -24,12 +24,17 @@ const createUser = async ({ username, password }) => {
     return { ...userWithoutPassword, token };
 };
 
+const getUserByNameAndPassword = ({username, password}) => {
+    return User.findOne({ where: { username, password: md5(password)} });
+};
+
 const deleteUser = (id) => User.destroy({ where: { id } });
 const getUserById = (id) => User.findByPk(id);
 const getAllUsers = () => User.findAll({attributes: { exclude: ['password'] }});
 
 module.exports = {
     checkUserExists,
+    getUserByNameAndPassword,
     getUserById,
     getAllUsers,
     createUser,
