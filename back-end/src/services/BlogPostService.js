@@ -28,10 +28,9 @@ const createPostCategory = ({ postId, categoryId }) => {
 
 const createPost = async ({ title, shortDescription, content, userId, categoriesIds }) => {
     const { dataValues } = await BlogPost.create({ title, shortDescription, content, userId });
-    
-    categoriesIds.forEach((categoryId) => {
-        createPostCategory({ postId: dataValues.id, categoryId });
-    });
+
+    await Promise.all(categoriesIds
+        .map(categoryId => createPostCategory({ postId: dataValues.id, categoryId })));
 
     return { ...dataValues };
 };

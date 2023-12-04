@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-    const { title, shortDescription, content, userId, categoryIds } = req.body;
+    const { title, shortDescription, content, userId, categoriesIds } = req.body;
     if (!title || title.length < 3) {
         return res.status(400).json({ message: "Title length must be at least 3 characters long" });
     }
@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
         return res.status(400).json({ message: "User id is required" });
     }
 
-    if (!categoryIds || categoryIds.length < 1) {
+    if (!categoriesIds || categoriesIds.length < 1) {
         return res.status(400).json({ message: "Categories is required" });
     }
 
