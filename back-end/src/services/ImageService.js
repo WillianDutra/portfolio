@@ -1,10 +1,10 @@
-const { Image, Post } = require('../models');
+const { User, Category, Image, BlogPost } = require('../models');
 const BadRequest = require("../utils/ErrorStatus/BadRequest");
 
 const getImagesFromPost = (id) => Image.findAll({ where: { postId: id } });
 
 const createImage = ({ postId, imageDescription, imagePath }) => {
-    const postExists = Post.findByPk(postId);
+    const postExists = BlogPost.findByPk(postId);
     if (!postExists) throw new BadRequest("Post not found");
 
     return Image.create({ postId, imageDescription, imagePath });

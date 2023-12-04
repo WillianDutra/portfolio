@@ -8,7 +8,7 @@ const createImage = async (req, res) => {
 
         return res.status(201).json(imageCreated);
     } catch (error) {
-        return res(statusCode || 500).json({ message: error.message });
+        return res.status(error.statusCode || 500).json({ message: error.message });
     }
 };
 
@@ -19,7 +19,7 @@ const deleteImage = async (req, res) => {
 
         return res.status(204).end();
     } catch (error) {
-        return res(statusCode || 500).json({ message: error.message });
+        return res.status(error.statusCode || 500).json({ message: error.message });
     }
 };
 

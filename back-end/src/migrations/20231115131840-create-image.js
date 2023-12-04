@@ -23,10 +23,12 @@ module.exports = {
       },
       imageDescription: {
         type: Sequelize.STRING,
+        field: 'image_description',
         allowNull: false,
       },
       imagePath: {
         type: Sequelize.STRING,
+        field: 'image_path',
         allowNull: false,
       },
     });
