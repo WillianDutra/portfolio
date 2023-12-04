@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
             postId: { type: DataTypes.INTEGER, foreignKey: true },
             imageDescription: DataTypes.STRING,
             imagePath: DataTypes.STRING,
+        },
+        {
+            underscored: true,
+            tableName: 'images'
         }
     );
 

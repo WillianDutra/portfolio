@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
             content: DataTypes.STRING,
             userId: { type: DataTypes.INTEGER, foreignKey: true },
             published: DataTypes.DATE,
+        },
+        {
+            underscored: true,
+            tableName: 'blog_posts'
         }
     );
 

@@ -21,6 +21,7 @@ const options = {
   },
   define: {
     timestamps: false,
+    freezeTableName: true
   },
   logging: process.env.DEBUG !== 'false' ? console.log : false,
 };

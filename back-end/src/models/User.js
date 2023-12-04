@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
             role: DataTypes.STRING,
             createdAt: DataTypes.DATE,
         },
+        {
+            underscored: true,
+            tableName: 'users'
+        }
     );
 
     User.associate = (models) => {

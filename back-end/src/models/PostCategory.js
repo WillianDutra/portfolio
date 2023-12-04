@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 foreignKey: true,
             },
+        },
+        {
+            underscored: true,
+            tableName: 'posts_categories'
         }
     );
 
