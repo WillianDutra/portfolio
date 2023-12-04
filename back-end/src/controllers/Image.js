@@ -2,8 +2,9 @@ const { ImageService } = require('../services');
 
 const createImage = async (req, res) => {
     try {
-        const { postId, imageName, imagePath } = req.body;
-        const imageCreated = await ImageService.createImage({ postId, imageName, imagePath });
+        const { postId, imageDescription } = req.body;
+        const imagePath = `localhost:3001/images/${req.file.filename}`;
+        const imageCreated = await ImageService.createImage({ postId, imageDescription, imagePath });
 
         return res.status(201).json(imageCreated);
     } catch (error) {

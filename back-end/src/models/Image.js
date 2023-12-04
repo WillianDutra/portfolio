@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
                 autoIncrement: true,
             },
             postId: { type: DataTypes.INTEGER, foreignKey: true },
-            imageName: DataTypes.STRING,
+            imageDescription: DataTypes.STRING,
             imagePath: DataTypes.STRING,
         }
     );

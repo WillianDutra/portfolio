@@ -21,12 +21,12 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      name: {
+      imageDescription: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      image: {
-        type: Sequelize.BLOB('long'),
+      imagePath: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
     });
