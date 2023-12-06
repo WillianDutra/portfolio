@@ -3,20 +3,21 @@ const { createToken } = require('../auth/authFunctions');
 const Conflict = require('../utils/ErrorStatus/Conflict');
 const { User } = require('../models');
 
-const checkUserExists = async (username) => User.findOne(
-    { where: { username } },
+const checkUserExists = async (email) => User.findOne(
+    { where: { email } },
     { attributes: { exclude: ['password'] } }
 );
 
-const createUser = async ({ username, password }) => {
-    const userExists = await checkUserExists(username);
+const createUser = async ({ email, name, password }) => {
+    const userExists = await checkUserExists(email);
     if (userExists) throw new Conflict('User already exists');
     
-    const { dataValues } = await User.create({ username, password: md5(password), role: "user" });
+    const { dataValues } = await User.create({ email, name, password: md5(password), role: "user" });
 
     const userWithoutPassword = {
         id: dataValues.id,
-        username: dataValues.username,
+        email: dataValues.email,
+        name: dataValues.name,
         role: dataValues.role,
     };
 
@@ -24,8 +25,8 @@ const createUser = async ({ username, password }) => {
     return { ...userWithoutPassword, token };
 };
 
-const getUserByNameAndPassword = ({username, password}) => {
-    return User.findOne({ where: { username, password: md5(password)} });
+const getUserByEmailAndPassword = ({email, password}) => {
+    return User.findOne({ where: { email, password: md5(password)} });
 };
 
 const deleteUser = (id) => User.destroy({ where: { id } });
@@ -34,7 +35,7 @@ const getAllUsers = () => User.findAll({attributes: { exclude: ['password'] }});
 
 module.exports = {
     checkUserExists,
-    getUserByNameAndPassword,
+    getUserByEmailAndPassword,
     getUserById,
     getAllUsers,
     createUser,

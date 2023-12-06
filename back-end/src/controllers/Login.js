@@ -3,9 +3,9 @@ const { createToken } = require('../auth/authFunctions');
 
 const userLogin = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const user = await UserService.getUserByNameAndPassword({ username, password });
-        if (!user) return res.status(401).json({ message: 'Invalid username or password' });
+        const { email, password } = req.body;
+        const user = await UserService.getUserByNameAndPassword({ email, password });
+        if (!user) return res.status(401).json({ message: 'Invalid email or password' });
 
         const { password: _p, ...userData } = user.dataValues;
         const token = createToken(userData);
