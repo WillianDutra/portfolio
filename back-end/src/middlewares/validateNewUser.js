@@ -1,14 +1,18 @@
 module.exports = (req, res, next) => {
-    const { username, password } = req.body;
-    if (username.length < 8) {
-      return res
-        .status(400).json({ message: "Username length must be at least 8 characters long" });
+    const { email, password, name } = req.body;
+
+    if (!email || !password || !name) {
+      return res.status(400).json({ message: "All fields must be filled" });
     }
-  
-    if (password.length < 6) {
-      return res
-        .status(400).json({ message: "Password length must be at least 6 characters long" });
+
+    const validateEmail = (email) => {
+      const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{3}$/g;
+      return regex.test(email);
+    };
+
+    if (!validateEmail(email) || password.length < 8) {
+      return res.status(400).json({ message: "Invalid email or password" });
     }
-  
+
     next();
   };

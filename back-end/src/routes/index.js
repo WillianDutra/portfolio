@@ -7,7 +7,8 @@ const {
   validateNewUser,
   validateToken,
   validateNewImage,
-  validateNewPost
+  validateNewPost,
+  validateLogin
 } = require('../middlewares');
 
 const multerConfig = require('../utils/multerConfig');
@@ -23,7 +24,7 @@ apiRoutes.get('/health', async (_req, res) => {
 });
 
 // Login
-apiRoutes.post('/login', Login.userLogin);
+apiRoutes.post('/login', validateLogin, Login.userLogin);
 
 // User
 apiRoutes.post('/user', validateNewUser, User.createUser);
@@ -34,6 +35,7 @@ apiRoutes.get('/categories', Category.getCategories);
 apiRoutes.post('/categories', validateToken, Category.createCategory);
 
 // Image
+// https://medium.com/@muh__hizbullah/multer-req-body-null-object-when-send-file-with-other-field-string-using-formdata-b275b4364404
 apiRoutes.post('/images', validateToken, validateNewImage, uploadImage, Image.createImage);
 apiRoutes.delete('/images/:id', validateToken, Image.deleteImage);
 

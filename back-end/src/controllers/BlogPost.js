@@ -35,8 +35,13 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
     try {
         const { id } = req.params;
-        await BlogPostService.deletePost(id);
+        const { role } = req.data;
 
+        if (role !== 'admin') {
+            return res.status(401).json({ message: 'Only admins can delete blog posts' });
+        }
+
+        await BlogPostService.deletePost(id);
         return res.status(204).end();
     } catch (error) {
         return res.status(500).json({ message: error.message });
